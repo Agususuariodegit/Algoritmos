@@ -66,5 +66,74 @@ def saldo_disponible(transacciones:list[tuple]) -> float:
 #             vocales_dis += palabra[i]
 
 
+# Anotaciones guia 7
+
+# a = input("Hola, inserte algo: ")
+
+# print(a)
+
+# print(int(a)+9)
+
+# Anotaciones guia 8
+
+# archivo = open("miarchivo.txt")
+# contenido = archivo.read
+# contenido -> muestra el archivo sin saltos de linea
+# print(contenido) -> muestra el archivo con saltos de linea 
+
+# vi tres.txt
+
+# def contar_lineas(nombre_archivo: str) -> int:
+
+
+# Ejercicio 4
+
+def estudiantes() -> list[str]:
+    lista: list[str] = ""
+    a = input("Ingrese estudiante: ")
+    while( a != "listo"):
+        lista += a 
+        a = input("ingrese el siguiente: ")
+    return lista 
+
+def operaciones_SUBE() -> list[tuple]:
+    lista_operaciones: list[tuple] = []
+    operacion = input("Seleccione C, D o X: ")
+    while (operacion != "X"):
+        monto = input("Ingrese monto: ")
+        lista_operaciones += [(operacion,monto)]
+        operacion = input("Seleccione C, D o X: ")
+    return lista_operaciones
+
+
+def jugar_7_y_medio():
+
+    puntaje:float = 0 
+    carta = random.choice([1,2,3,4,5,6,7,10,11,12])
+    if(carta == 10 or carta == 11 or carta == 12):
+        puntaje += 0.5 
+    else:
+        puntaje += carta 
+    print("Se reparte una carta \nTu carta es " + str(carta))
+    print("Tu puntaje es " + str(puntaje))
+
+    siguiente = input("¿Desea tomar otra carta?: ")
+    
+    while (siguiente != "NO"):
+             
+             carta = random.choice([1,2,3,4,5,6,7,10,11,12])
+
+             if(carta == 10 or carta == 11 or carta == 12):
+                 puntaje += 0.5
+                 print("Tu carta es " + str(carta))
+                 print("Tu puntaje es " + str(puntaje))
+             else:
+                 puntaje += carta
+                 print("Tu carta es " + str(carta))
+                 print("Tu puntaje es " + str(puntaje))
+
+print(jugar_7_y_medio())
+
+
 
 
