@@ -1,0 +1,280 @@
+import math
+
+# Ejercicio 1 
+
+def imprimir_hola_mundo():
+    print ("hola mundo")
+
+def imprimir_verso():
+    print ("habia un avestruz \ny un delfín")
+
+def raiz_de_2():                #CORREGIR
+    x:float = 2
+    x = math.sqrt(x)
+    x = round(x) 
+    return x 
+
+def factorial_2():
+    x:int = 2
+    x *= (x-1)
+    return x  
+
+def perimetro(): 
+    x:float = 2*(math.pi)
+    return x 
+
+# Ejercicio 2
+
+def imprimir_saludo (nombre:str):
+    print("hola " + nombre)
+
+def raiz_cuadrada_de(x:float) -> float:
+    return math.sqrt(x)
+
+def fahrenheit_a_celcius(c:float) -> float:
+    return (c*(9/5) + 32)
+
+def imprimir_dos_veces(estribillo:str): #CORREGIR
+    print (estribillo * estribillo)
+
+def es_multiplo(x:int, y:int) -> bool:
+    res: bool = False 
+    if (x%y == 0):
+        res = True
+    else: res = False 
+    return res   
+        
+def es_par(x:int) -> bool:
+    res: bool = False 
+    if (es_multiplo(x,2)):
+        res = True 
+    else: res = False 
+    return res 
+
+def cantidad_de_pizzas(comensales:int,min_cantidad:int) -> int:
+    res:int = 0
+    total_porciones:int = comensales*min_cantidad
+    while (total_porciones > 0):
+        res += 1
+        total_porciones -= 8
+    else:
+        res += 0 
+    return res
+
+# Ejercicio 3 
+
+def alguno_es_0 (x:float, y:float) -> bool:
+    res: bool = x == 0 or y == 0 
+    return res     
+
+def ambos_son_0 (x:float, y:float) -> bool:
+    res: bool = x == 0 and y == 0
+    return res    
+
+def es_nombre_largo (nombre:str) -> bool: 
+    res:bool = (3 <= len(nombre)) and (len(nombre) <= 8)
+    return res 
+
+def es_bisiesto (año:int) -> bool:
+    res: bool = es_multiplo(año,400) or (es_multiplo(año,4) and (not (es_multiplo (año,100))))
+    return res 
+
+# Ejercicio 4 
+
+def peso_pino (altura: int) -> int:
+    altura *= 100
+    res:int = 0 
+    if (altura <= 300):
+        res = altura*3
+    else: 
+        res = res + 900 + 2*(altura - 300)
+    return res
+
+def es_peso_util (peso: int) -> bool: 
+    res:bool = (peso >= 400) and (peso <= 1000) 
+    return res 
+
+def sirve_pino (altura_m: int) -> bool:
+    
+    altura_cm:int = altura_m*100
+    peso_kg:int = 0 
+    res:bool = True   
+    
+    if (altura_cm <= 300):
+        peso_kg = altura_cm*3
+    else: 
+        peso_kg = 900 + 2*(altura_cm - 300)
+
+    res = (peso_kg >= 400) and (peso_kg <= 1000)
+    return res 
+
+def sirve_pino_comp (altura_pino: int) -> bool: 
+    res:bool = False 
+    cambio = peso_pino(altura_pino)
+    res = es_peso_util (cambio)
+    return res 
+ 
+# Ejercicio 5 !! VER -> IF THEN ELSE  
+
+def devolver_el_doble_si_es_par(numero: int) -> int: 
+    res:int = 0 
+    if (numero % 2 == 0):
+        res += numero*2
+    else: res = numero
+    return res 
+
+def devolver_sig_sipar_sino_mismo (numero: int) -> int:
+    res:int = 0 
+    if (es_par(numero)):
+        res = numero + 1
+    else: res = numero 
+    return res 
+
+def devolver_doble_simult3_triple_simult9 (numero: int) -> int: 
+    if (es_multiplo(numero,9)):
+        numero = numero*3
+    else: 
+        if (es_multiplo(numero,3)):
+            numero = numero*2
+        else: numero
+    return numero
+
+def nombre_masde5 (nombre:str):
+    if(len(nombre) >= 5):
+        print("¡Tu nombre tiene muchas letras!")
+    else: 
+        print("Tu nombre tiene menos de 5 caracteres")
+
+def elRango (x:int):
+    res:str = "los pollos hermanos"
+    if(x < 5):
+        res = "Menor a 5"
+    else: 
+        if(20 >= x and x >= 10):
+            res = "Entre 10 y 20"
+        else: 
+            if(x > 20):
+                res = "Mayor a 20"
+            else: res 
+    return print(res)
+
+def pico_y_pala(sexo:str, edad:int): 
+    res:str = "te toca agarrar la pala"
+    if (edad < 18 or edad > 63):
+        res = "toca vacacionar"
+    else: 
+        if((sexo == "F" and edad >= 60) or (sexo == "M" and edad >= 63)):
+            res = "toca vacacionar"
+        else: res 
+    return res 
+
+# Ejercicio 6 
+
+def num_del_1_al_10():
+    num:int = 0 
+    while (num <= 10):
+        print(num)
+        num += 1 
+
+def num_pares_entre_10y40():
+    num:int = 10 
+    while (num <= 40 and es_par(num)):
+        print(num)
+        num += 2 
+
+def imprimir_eco_10():
+    contador:int = 1
+    lista:str = "" 
+    while (contador <= 10):
+        lista += "eco "
+        contador += 1 
+    return print(lista) 
+
+def cuenta_regresiva(conteo:int):
+    while (conteo > 0):
+        print(conteo) 
+        conteo -= 1 
+    print ("¡¡¡Despegue!!!")
+
+def viaje_en_el_tiempo(año_partida:int, año_llegada:int):
+    while (año_partida > año_llegada):
+        año_partida -= 1 
+        print("¡Viajamos un año al pasado, estamos en el año", año_partida, "!") # corregir espacio  
+
+def viaje_al_384_aC(año_partida:int):
+    while (año_partida > (-384)):
+        año_partida -= 20 
+        print ("¡Viajamos 20 años al pasado, estamos en el año", año_partida, "!")
+    print ("llegamos")
+
+# Ejercicio 7
+
+def num_del_1_al_10():
+    for num in range (1,11,1):
+        print(num)
+
+def num_pares_entre_10y40():
+    for num in range (10,41,2):
+        print(num)
+
+def imprimir_eco_10():
+    for num in range (1,11,1):
+        print("eco")
+
+def cuenta_regresiva(conteo:int):
+    for num in range (conteo,0,(-1)):
+        print (conteo)
+        conteo -= 1 
+    print ("¡¡Despegue!!")
+
+def viaje_en_el_tiempo(año_partida:int, año_llegada:int):
+    for num in range (año_partida,año_llegada,(-1)):  # qué hace el (-1) ???
+        print ("Estamos en el año",año_partida)
+        año_partida -= 1 
+    print("llegamos")
+
+def viaje_al_384_aC(año_partida:int):
+    for num in range (año_partida,383,(-1)):
+        print ("Estamos en el año",año_partida)
+        año_partida -= 1 
+    print("llegamos")
+
+# Ejercicio 8
+
+def problema_1():
+    x:int = 5 
+    y:int = 7 
+    x = x + y 
+    return x 
+        
+def problema_2():
+    x:int = 5 
+    y:int = 7 
+    z:int = x + y 
+    y = z * 2 
+    return y 
+
+# x=5 ; y=7 ; x="hora"; y = x * 2
+
+def problema_3():
+    x:int = 5
+    y:int = 7 
+    x = "hora"
+    y = "hora" * 2 
+    return y
+
+# resto de los problemas de pueden ver facil.
+
+# Ejercicio 9
+
+def rt(x: int, g: int) -> int:
+    g = g + 1
+    return x + g
+
+g:int = 0
+
+def ro(x: int) -> int:
+    global g
+    g = g + 1
+    return x + g
+
