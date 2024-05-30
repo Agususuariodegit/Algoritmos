@@ -1,4 +1,65 @@
+from typing import List, Dict, Tuple
 import math 
+import random
+
+# Primera parte
+
+def pertenece(x:int, lista: list [int]) -> bool:
+    contador:int = 0
+    res:bool = False 
+    while (contador < len(lista)):
+        if (lista[contador] == x):
+            res = True
+            contador = len(lista) + 1 
+        else:
+            contador += 1 
+    return res
+
+def divide_a_todos(x:int, lista: list [int]) -> bool:
+    contador:int = 0
+    res:bool = True
+    divisores:int = 0 
+    while (contador < len(lista)):
+        if (lista [contador] % x == 0):
+             divisores += 1
+             contador += 1  
+        else:
+            contador += 1 
+    if (divisores == len(lista)):
+        res = True 
+    else:
+        res = False 
+    return res 
+
+def suma_total(lista: list [int]) -> int:
+    indice:int = 0
+    suma: int = 0 
+    while (indice < len(lista)):
+        suma += lista [indice]
+        indice += 1 
+    return suma 
+
+def ordenados(lista: list[int]) -> bool:
+    i:int = 0 
+    res:bool = True 
+    while (i < len(lista) - 1):
+        if (lista[i] <= lista[i + 1]):
+            i += 1 
+        else:
+            res = False
+            i += 1  
+    return res 
+
+def alguna_palabra(lista: list[str]) -> bool:
+    i:int = 0
+    res:bool = False 
+    while (i < len(lista)):
+        if (len (lista[i]) > 7):
+            res = True 
+            i += 1 
+        else:
+            i += 1 
+    return res 
 
 # Ejercicio 6
 
@@ -58,13 +119,91 @@ def saldo_disponible(transacciones:list[tuple]) -> float:
             monto -= (transacciones[i])[1]
     return monto
 
-# def tiene_vocales_dis(palabra:str) -> bool:
-#     res = bool
-#     vocales_dis: list [str] = ""  
-#     for i in range(0,len(palabra),1):
-#         if (97 <= ord(palabra[i]) and ord(palabra[i]) <= 122):
-#             vocales_dis += palabra[i]
+def tres_vocales_distintas(palabra:str) -> bool:
+    res:bool = False
+    vocal:str = ""
+    contador:int = 0
+    for i in range(0,len(palabra),1):
+        if (97 <= ord(palabra[i]) and ord(palabra[i]) <= 122 and vocal != palabra[i]):
+                vocal = palabra[i]
+                contador += 1 
+    res = contador > 2 
+    return res 
+            
+# Segunda Parte 
 
+# Ejercicio 2 
+
+def poner_ceros(lista:list [int]) -> list [int]:
+    for i in range(0,len(lista),1):
+        lista[i] = 0 
+    return lista 
+
+def ceros_en_pares(lista:list [int]) -> list [int]:
+    lista1 = lista.copy()                          
+    for i in range (0,len(lista1),2):
+        lista1[i] = 0
+    return lista1
+
+def caracter_pertenece(c:str, palabra:list [str]) -> bool:
+    res:bool = False 
+    for i in range(0,len(palabra),1):
+        if (palabra[i] == c):
+            res = True
+    return res
+
+def quitar_vocales(palabra:str) -> str:                                
+    vocales:list [str] = ["a","e","i","o","u","A","E","I","O","U"]
+    palabraNueva:str = ""
+    for i in range(0,len(palabra),1):
+        if (not caracter_pertenece(palabra[i],vocales)):
+            palabraNueva += palabra[i]
+    return palabraNueva 
+
+def reemplazar_vocales(palabra:str) -> str:
+    vocales:list [str] = ["a","e","i","o","u","A","E","I","O","U"] 
+    palabraNueva:str = ""
+    for i in range(0,len(palabra),1):
+        if (not caracter_pertenece(palabra[i],vocales)):
+            palabraNueva += palabra[i]
+        else:
+            palabraNueva += "_"
+    return palabraNueva 
+
+def da_vuelta_str(palabra:str) -> str:
+    a = ""
+    for i in range(len(palabra)-1,-1,-1):
+        a += palabra[i]
+    return a
+
+def eliminar_repetidos(palabra:str) -> str:
+    a = ""
+    for i in range(0,len(palabra),1):
+        if (not caracter_pertenece(palabra[i],a)):
+            a += palabra[i]
+    return a
+
+# Ejercicio 3
+
+def promedio(numeros:list [int]) -> int:
+    res:int = suma_total(numeros)/len(numeros)
+    return res
+
+def aprobado(notas:list [int]) -> int:
+    res = 0
+    aprobadas:int = 0
+    for i in range(0,len(notas),1):
+        if(notas[i] < 4):
+            res = 1
+    for i in range(0,len(notas),1):
+        if(notas[i] >= 4):
+            aprobadas += 1 
+    if (aprobadas == len(notas) and 4 <= promedio(notas) and promedio(notas) < 7):
+        res = 2
+    else:
+        if(aprobadas == len(notas) and promedio(notas) >= 7):
+            res = 3 
+    return res 
 
 # Anotaciones guia 7
 
@@ -110,6 +249,7 @@ def jugar_7_y_medio():
 
     puntaje:float = 0 
     carta = random.choice([1,2,3,4,5,6,7,10,11,12])
+
     if(carta == 10 or carta == 11 or carta == 12):
         puntaje += 0.5 
     else:
@@ -117,22 +257,86 @@ def jugar_7_y_medio():
     print("Se reparte una carta \nTu carta es " + str(carta))
     print("Tu puntaje es " + str(puntaje))
 
-    siguiente = input("¿Desea tomar otra carta?: ")
-    
-    while (siguiente != "NO"):
-             
-             carta = random.choice([1,2,3,4,5,6,7,10,11,12])
+    siguiente = "SI"
 
-             if(carta == 10 or carta == 11 or carta == 12):
-                 puntaje += 0.5
-                 print("Tu carta es " + str(carta))
-                 print("Tu puntaje es " + str(puntaje))
-             else:
-                 puntaje += carta
-                 print("Tu carta es " + str(carta))
-                 print("Tu puntaje es " + str(puntaje))
+    while (siguiente != "NO" and puntaje < 7.50):   
+            
+            siguiente = input("¿Desea tomar otra carta?: ")      
+            
+            if (siguiente != "NO"):
 
-print(jugar_7_y_medio())
+                carta = random.choice([1,2,3,4,5,6,7,10,11,12])
+                
+                if(carta == 10 or carta == 11 or carta == 12):
+                    puntaje += 0.5
+                    print("Tu carta es " + str(carta))
+                    print("Tu puntaje es " + str(puntaje))
+                else:
+                    puntaje += carta
+                    print("Tu carta es " + str(carta))
+                    print("Tu puntaje es " + str(puntaje))
+                
+    if (puntaje == 7.50):
+        print("ganaste")
+    else:
+        print("el triplehijueputa del menor")
+
+# Ejercicio 5 
+
+def pertenece_a_cada_uno_version_1(lista:list [list [int]],x:int) -> list[bool]:
+    res:list[bool] = []
+    for i in range(0,len(lista),1):
+        if(pertenece(x,lista[i])):
+            res += [True]
+        else:
+            res += [False]
+    return res 
+
+# def problema_pertenece_a_cada_uno_version_2()
+
+def pertenece_a_lista(x:list, lista: list [list]) -> bool:
+    contador:int = 0
+    res:bool = False 
+    while (contador < len(lista)):
+        if (lista[contador] == x):
+            res = True
+            contador = len(lista) + 1 
+        else:
+            contador += 1 
+    return res
+
+def es_matriz(lista: list[list [int]]) -> bool:
+    res:bool = True
+    if(lista == [] or pertenece_a_lista([],lista)):
+        res = False 
+    else:
+        for i in range(1,len(lista),1):
+            if(len(lista[i]) != len(lista[0])):
+                res = False 
+    return res 
+
+def filas_ordenadas(lista: list[list [int]]) -> list[bool]:
+    ordenes = []
+    for i in range(0,len(lista),1):
+        if(ordenados(lista[i]) == True):
+            ordenes += [True]
+        else:
+            ordenes += [False]
+    return ordenes
+
+# import numpy as np
+
+# d = 2
+# m = np.random.randint(0,10, (d, d))
+
+# def aplanar (matriz: list [list [int]]) -> list [list[int]]:
+#     lista_vacia: list [list [int]] = []
+#     for i in range(0,len(matriz),1):
+#         lista_vacia += matriz[i]
+#     return lista_vacia
+
+# print(aplanar(m))
+
 
 
 
