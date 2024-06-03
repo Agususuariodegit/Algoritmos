@@ -1,0 +1,39 @@
+from queue import LifoQueue as Pila
+
+# Ejercicio 12     
+
+def evaluar_expresion(s: str) -> float:
+    res:float = 0
+    caracteres = juntarnumeros(s," ")
+    p = Pila()
+    for caracterActual in caracteres:
+        if caracterActual in ["+","-","/","*"]:
+            x = p.get()
+            y = p.get()
+            if caracterActual == "+":
+                p.put(x+y)
+        else:
+            p.put(float(caracterActual))
+    x = p.get()
+    return x 
+
+
+def juntarnumeros(s: str, caracterDistingo: str) -> list[str]:
+    caracteres = []
+    
+    for i in range(len(s)):
+        caracteres += s[i]
+    palabra:str = ""
+    expresion:list [str] = []
+    
+    for i in range(len(caracteres)):
+        if caracteres[i] == caracterDistingo and palabra != "":
+            expresion += [palabra]
+            palabra = ""
+        else:
+            palabra += caracteres[i]
+    if palabra != "":
+        expresion += [palabra]
+    return expresion      
+
+print(evaluar_expresion("2 3 + 3 + 2 +"))
