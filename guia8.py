@@ -252,3 +252,159 @@ def evaluar_expresion(s: str) -> float:
             p.put(float(caracterActual))
     x = p.get()
     return x 
+
+# Colas 
+
+from queue import Queue as Cola
+
+def generar_num_al_azar(cantidad:int,desde:int,hasta:int) -> Cola[int]:   
+    c = Cola()
+    for i in range(0,cantidad,1):
+        x = random.randint(desde,hasta)
+        c.put(x)
+    return c 
+
+# Ejercicio 14
+
+def cantidad_de_elem(c:Cola) -> int:
+    res = 0
+    c2 = Cola()
+    while(c.empty() == False):
+        res += 1 
+        x = c.get()
+        c2.put(x)
+    while(c2.empty() == False): 
+        x = c2.get()
+        c.put(x)
+    return res 
+
+def cola_trivial() -> Cola:
+    c = Cola()
+    c.put(1)
+    c.put(91)
+    c.put(92)
+    c.put(2)
+    c.put(4)
+    c.put(5)
+    c.put(6)
+    c.put(61)
+    c.put(8)
+    c.put(9)
+    c.put(30)
+    c.put(11)
+    c.put(12)
+    return c 
+
+# Ejercicio 15 
+
+def buscar_maximo(c:Cola[int]) -> int:
+    res = 0 
+    while(cantidad_de_elem(c) > 1):
+        x = c.get()
+        y = c.get()
+        if x > y:
+            c.put(x)
+        else:
+            c.put(y)
+    res = c.get()
+    return res 
+    
+# Ejercicio 16
+
+def armar_secuencia_de_bingo() -> Cola:
+    num = 100
+    s:list[int] = []
+    for i in range(num):
+        s += [i] 
+    t:list[int] = []
+    for j in range(num):
+        x = random.choice(s)
+        t += [x]
+        s.remove(x)
+    c = Cola()
+    for r in range(num):
+        c.put(t[r])
+    return c 
+
+def pertenece(x:int,lista:list[int]) -> bool:
+    res:bool = False
+    for i in range(len(lista)):
+        if lista[i] == x:
+            res = True 
+    return res  
+
+def jugar_carton_de_bingo(carton : list[int]) -> int:
+    jugadas = 0
+    ganadas = 0
+    objetivo = len(carton)
+    bolillero = armar_secuencia_de_bingo()
+    while(ganadas != objetivo):
+            x = bolillero.get()
+            jugadas += 1  
+            if pertenece(x,carton): 
+                ganadas += 1
+    return jugadas 
+     
+# Ejercicio 17 
+
+def n_pacientes_urgentes(c : Cola[(int, str, str)]) -> int:
+    urgentes:int = 0
+    c2 = Cola()
+    while(c.empty() == False):
+        x = c.get()
+        c2.put(x)
+        if x[0] == 1 or x[0] == 2 or x[0] == 3:
+            urgentes += 1 
+    while(c2.empty() == False):
+        y = c2.get()
+        c.put(y)
+    return urgentes 
+        
+def cola_comp() -> Cola[(int, str, str)]:
+    c = Cola()
+    c.put((10,"A","oculista"))
+    c.put((10,"B","medico"))
+    c.put((10,"C","medico"))
+    c.put((10,"D","medico"))
+    return c 
+
+# Ejercicio 18 
+
+def atencion_a_clientes(clientes: Cola[(str, int, bool, bool)]) -> Cola[(str, int, bool, bool)]:
+    clientes_copy = clonar_cola(clientes)
+    c_res = Pila()
+    for i in range(cantidad_de_elem(clientes_copy)):
+        x = clientes_copy.get()
+        if x[3] == True:
+            c_res.put(x)
+        else:
+            clientes_copy.put(x)
+    for i in range(cantidad_de_elem(clientes_copy)):
+        x = clientes_copy.get()
+        if x[2] == True:
+            c_res.put(x)
+        else:
+            clientes_copy.put(x)
+    for i in range(cantidad_de_elem(clientes_copy)):
+        x = clientes_copy.get()
+        c_res.put(x)
+    return c_res
+
+def clonar_cola(c: Cola[(str, int, bool, bool)]) -> Cola[(str, int, bool, bool)]:
+    copia = Cola()
+    lista_clientes:list [(str, int, bool, bool)] = []
+    for i in range(cantidad_de_elem(c)):
+        x = c.get()
+        copia.put(x)
+        lista_clientes += [x] 
+    for i in range(len(lista_clientes)):
+        c.put(lista_clientes[i])
+    return copia
+
+def cola_comp2() -> Cola[(int, str, str)]:
+    c = Cola()
+    c.put(("a",1,True,False))
+    c.put(("b",2,False,False))
+    c.put(("c",3,False,True))
+    c.put(("d",4,True,True))
+    return c 
